@@ -1,24 +1,3 @@
-const cardList = [
-  {
-    title: "Kitten 1",
-    image: "layout/images/product1.jpg",
-    link: "About Kitten 1",
-    desciption: "Demo description about kitten 1"
-  },
-  {
-    title: "Kitten 2",
-    image: "layout/images/product2.jpg",
-    link: "About Kitten 2",
-    desciption: "Demo description about kitten 2"
-  },
-  {
-    title: "Kitten 3",
-    image: "layout/images/product3.jpg",
-    link: "About Kitten 3",
-    desciption: "Demo description about kitten 3"
-  }
-];
-
 const clickMe = () => {
   $('#modal1').modal('open');
 };
@@ -45,7 +24,7 @@ const addCards = (items) => {
         </div>
         <div class="card-reveal">
           <span class="card-title grey-text text-darken-4">${item.title}<i class="material-icons right">close</i></span>
-          <p class="card-text">${item.desciption}</p>
+          <p class="card-text">${item.description}</p>
         </div>
       </div>
     </div>`;
@@ -58,6 +37,14 @@ $(document).ready(function () {
   $('#formSubmit').click(() => {
     submitForm();
   });
-  addCards(cardList);
-  $('.modal').modal(); // Initialize the modal
+  getProjects();
+  $('.modal').modal();
 });
+
+const getProjects = () => {
+  $.get('/api/projects', (response) => {
+    if (response.statusCode == 200) {
+      addCards(response.data);
+    }
+  });
+};
