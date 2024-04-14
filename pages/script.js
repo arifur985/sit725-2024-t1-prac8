@@ -1,14 +1,23 @@
+
 const clickMe = () => {
   $('#modal1').modal('open');
 };
 
 const submitForm = () => {
-  let formData = {};
-  formData.first_name = $('#first_name').val();
-  formData.last_name = $('#last_name').val();
-  formData.password = $('#password').val();
-  formData.email = $('#email').val();
-  console.log("Form Data Submitted: ", formData);
+  let formData = {
+    email: $('#email').val()
+  };
+  
+  $.ajax({
+    type: "POST",
+    url: "/submit-form",
+    data: formData,
+    success: function(response) {
+      console.log("Server response:", response);
+      Materialize.toast('Form Submitted Successfully!', 4000); // Display success message
+    },
+    dataType: "json"
+  });
 };
 
 const addCards = (items) => {
