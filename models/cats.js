@@ -1,12 +1,15 @@
-let client = require('../dbConnection');
-let collection = client.db().collection('Cats');
+const connect = require('../dbConnection');
 
-async function insertCat(cat){
+async function insertCat(cat) {
+    const db = await connect();
+    const collection = db.collection('Cats');
     return collection.insertOne(cat);
 }
 
-async function getAllCats(){
+async function getAllCats() {
+    const db = await connect();
+    const collection = db.collection('Cats');
     return collection.find().toArray();
 }
 
-module.exports = {insertCat, getAllCats}
+module.exports = { insertCat, getAllCats };
