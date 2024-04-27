@@ -1,3 +1,8 @@
+let socket = io();
+socket.on('number', (message) => {
+    console.log('random number: ' + message);
+});
+
 const addCards = (items) => {
     items.forEach(item => {
         let itemToAppend = '<div class="col s4 center-align">'+

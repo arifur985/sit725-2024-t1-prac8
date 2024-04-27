@@ -1,4 +1,3 @@
-let express = require('express');
 let model = require('../models/cats');
 
 const insertCat = async function(req, res) {
